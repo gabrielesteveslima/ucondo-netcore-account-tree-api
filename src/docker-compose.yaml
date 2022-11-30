@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: "ucondo-accounttree-db"
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "admin@123"
+      MSSQL_PID: "Express"
+    volumes:
+      - C:\uCondo\Data\AccountTree:/var/opt/mssql/data
+
+  webapi:
+    image: "ucondo-accounttree"
+    container_name: "ucondo-accounttree-api"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - default
+    depends_on:
+      - "db"
+
+networks:
+  default:
+    driver: bridge
