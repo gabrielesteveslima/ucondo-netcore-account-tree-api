@@ -1,6 +1,11 @@
 ﻿namespace UCondoAccountTree.Application.AccountType.Commands;
 
-public class CreateNewAccountTypeCommandValidator
+using FluentValidation;
+
+public class CreateNewAccountTypeCommandValidator : AbstractValidator<CreateNewAccountTypeCommand>
 {
-    
+    public CreateNewAccountTypeCommandValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty().WithMessage("'Name' is requiried");
+    }
 }

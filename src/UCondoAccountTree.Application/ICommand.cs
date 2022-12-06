@@ -1,6 +1,13 @@
 ﻿namespace UCondoAccountTree.Application;
 
-public interface ICommand
+using MediatR;
+
+public interface ICommand : IRequest
 {
-    
+    Guid Id { get; }
+}
+
+public interface ICommand<out TResult> : IRequest<TResult>
+{
+    Guid Id { get; }
 }

@@ -25,6 +25,6 @@ public class AccountTypeRepository : IAccountTypeRepository
 
     public async Task AddAsync(AccountType accountType)
     {
-        await _context.AccountTypes.AddAsync(accountType); 
+        await _context.AccountTypes.AddAsync(accountType);
     }
 }

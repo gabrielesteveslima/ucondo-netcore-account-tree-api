@@ -1,6 +1,5 @@
 ﻿namespace UCondoAccountTree.Application.AccountType.Queries;
 
-public class GetAccountTypeQuery
+public class GetAccountTypeQuery : IQuery<List<AccountTypeDto>>
 {
-    
 }

@@ -1,6 +1,6 @@
 ﻿namespace UCondoAccountTree.Domain.SeedWorks;
 
-public class IUnitOfWork
+public interface IUnitOfWork
 {
-    
+    Task<int> CommitAsync(CancellationToken cancellationToken = default);
 }

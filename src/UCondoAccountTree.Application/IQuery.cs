@@ -1,6 +1,7 @@
 ﻿namespace UCondoAccountTree.Application;
 
-public class IQuery
+using MediatR;
+
+public interface IQuery<out TResult> : IRequest<TResult>
 {
-    
 }

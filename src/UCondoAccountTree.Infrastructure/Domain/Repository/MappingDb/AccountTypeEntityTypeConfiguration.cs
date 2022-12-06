@@ -3,7 +3,6 @@
 using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UCondoAccountTree.Domain.AggregatesModels.Accounts;
 using UCondoAccountTree.Domain.AggregatesModels.AccountTypes;
 
 public class AccountTypeEntityTypeConfiguration : IEntityTypeConfiguration<AccountType>

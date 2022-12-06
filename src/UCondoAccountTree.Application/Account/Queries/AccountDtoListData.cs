@@ -1,9 +1,12 @@
 ﻿namespace UCondoAccountTree.Application.Account.Queries;
 
-using Commands;
-
-public class AccountDtoList
+public class AccountDtoListData
 {
     public AccountDto ParentAccount { get; set; }
     public IEnumerable<AccountDto> ChildAccounts { get; set; }
+}
+
+public class AccountDtoList
+{
+    public List<AccountDtoListData> Data { get; set; }
 }

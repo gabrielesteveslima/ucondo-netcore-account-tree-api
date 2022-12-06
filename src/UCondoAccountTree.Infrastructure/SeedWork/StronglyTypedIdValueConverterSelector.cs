@@ -15,21 +15,21 @@ public class StronglyTypedIdValueConverterSelector : ValueConverterSelector
 
     public override IEnumerable<ValueConverterInfo> Select(Type modelClrType, Type providerClrType = null)
     {
-        IEnumerable<ValueConverterInfo> baseConverters = base.Select(modelClrType, providerClrType);
-        foreach (ValueConverterInfo converter in baseConverters)
+        var baseConverters = base.Select(modelClrType, providerClrType);
+        foreach (var converter in baseConverters)
         {
             yield return converter;
         }
 
-        Type underlyingModelType = UnwrapNullableType(modelClrType);
-        Type underlyingProviderType = UnwrapNullableType(providerClrType);
+        var underlyingModelType = UnwrapNullableType(modelClrType);
+        var underlyingProviderType = UnwrapNullableType(providerClrType);
 
         if (underlyingProviderType is null || underlyingProviderType == typeof(Guid))
         {
-            bool isTypedIdValue = typeof(TypedIdValueBase).IsAssignableFrom(underlyingModelType);
+            var isTypedIdValue = typeof(TypedIdValueBase).IsAssignableFrom(underlyingModelType);
             if (isTypedIdValue)
             {
-                Type converterType = typeof(TypedIdValueConverter<>).MakeGenericType(underlyingModelType);
+                var converterType = typeof(TypedIdValueConverter<>).MakeGenericType(underlyingModelType);
 
                 yield return _converters.GetOrAdd((underlyingModelType, typeof(Guid)), _ =>
                 {

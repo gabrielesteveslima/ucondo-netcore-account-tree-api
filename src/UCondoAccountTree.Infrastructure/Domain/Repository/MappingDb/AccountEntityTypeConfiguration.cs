@@ -20,12 +20,12 @@ public class AccountEntityTypeConfiguration : IEntityTypeConfiguration<Account>
             .Property(x => x.Value)
             .HasColumnName("AccountCode")
             .IsRequired();
-        
+
         builder.HasOne(x => x.AccountTypeRef)
             .WithMany(x => x.AccountsRef)
             .HasForeignKey(x => x.AccountTypeId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.OwnsMany(o => o.AccountsRelations, navigationBuilder =>
         {
             navigationBuilder.ToTable("AccountRelations", SchemaName.UCondoAccountTree);

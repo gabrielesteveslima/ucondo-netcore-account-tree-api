@@ -1,9 +1,8 @@
-﻿namespace UCondoAccountTree.Domain.AggregatesModels.Accounts;
+﻿namespace UCondoAccountTree.Domain.AggregatesModels.AccountTypes;
 
 public interface IAccountTypeRepository
 {
-    Task<AccountType> GetByIdAsync(TypedId id);
+    Task<AccountType> GetByIdAsync(AccountTypeId accountTypeId);
+    Task<List<AccountType>> GetAllAsync();
     Task AddAsync(AccountType accountType);
-    Task UpdateAsync(AccountType accountType);
-    void RemoveAsync(TypedId id);
 }

@@ -1,19 +1,19 @@
 ﻿namespace UCondoAccountTree.Domain.AggregatesModels.Accounts;
 
-public class AccountChilds : Entity
+public class AccountsRelations : Entity
 {
     //ef-core
-    public AccountChilds()
+    public AccountsRelations()
     {
-        
     }
-    
-    public AccountChilds(AccountId parentAccountId, AccountId childAccountId)
+
+    public AccountsRelations(AccountId parentAccountId, AccountId childAccountId)
     {
         ParentAccountId = parentAccountId;
         ChildAccountId = childAccountId;
+        CreateAt = DateTime.Now;
     }
-    
+
     public AccountId ParentAccountId { get; set; }
     public AccountId ChildAccountId { get; set; }
 }

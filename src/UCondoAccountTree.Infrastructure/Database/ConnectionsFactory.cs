@@ -28,10 +28,9 @@ public class ConnectionsFactory : IConnectionFactory, IDisposable
 
     public void Dispose()
     {
-        if (_connection is {State: ConnectionState.Open})
+        if (_connection is { State: ConnectionState.Open })
         {
             _connection.Dispose();
         }
     }
 }
-

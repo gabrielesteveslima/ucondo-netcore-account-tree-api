@@ -1,6 +1,23 @@
 ﻿namespace UCondoAccountTree.WebAPI.Configuration.ProblemDetails;
 
-public class ProblemDetailsExtension
+using Application.Configuration;
+using Domain.SeedWorks;
+using Hellang.Middleware.ProblemDetails;
+using Helpers;
+
+public static class ProblemDetailsExtension
 {
-    
+    internal static IServiceCollection AddProblemDetailsMiddleware(this IServiceCollection services)
+    {
+        services.AddScoped<ProblemDetailsFilter>();
+        services.AddProblemDetails(setup =>
+        {
+            setup.Map<InvalidCommandException>(exception =>
+                new InvalidCommandRuleValidationExceptionProblemDetails(exception));
+            setup.Map<BusinessRuleValidationException>(exception =>
+                new BusinessRuleValidationExceptionProblemDetails(exception));
+        });
+
+        return services;
+    }
 }

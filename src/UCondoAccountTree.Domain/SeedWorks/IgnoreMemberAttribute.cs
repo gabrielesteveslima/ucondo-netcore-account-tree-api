@@ -1,6 +1,6 @@
 ﻿namespace UCondoAccountTree.Domain.SeedWorks;
 
-public class IgnoreMemberAttribute
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+public sealed class IgnoreMemberAttribute : Attribute
 {
-    
 }

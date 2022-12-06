@@ -1,8 +1,8 @@
 ﻿namespace UCondoAccountTree.Infrastructure.Domain.Repository;
 
+using Database;
 using Microsoft.EntityFrameworkCore;
 using UCondoAccountTree.Domain.AggregatesModels.Accounts;
-using UCondoAccountTree.Infrastructure.Database;
 
 public class AccountRepository : IAccountRepository
 {

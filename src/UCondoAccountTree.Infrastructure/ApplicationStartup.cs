@@ -11,7 +11,7 @@ public class ApplicationStartup
         IServiceCollection services,
         IConfiguration configuration)
     {
-        IServiceProvider serviceProvider = CreateAutofacServiceProvider(services, configuration);
+        var serviceProvider = CreateAutofacServiceProvider(services, configuration);
         return serviceProvider;
     }
 
@@ -28,7 +28,7 @@ public class ApplicationStartup
         container.RegisterModule(new DomainModule(configuration));
         container.RegisterModule(new LogModule());
 
-        IContainer buildContainer = container.Build();
+        var buildContainer = container.Build();
 
         ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(buildContainer));
         AutofacServiceProvider serviceProvider = new(buildContainer);
