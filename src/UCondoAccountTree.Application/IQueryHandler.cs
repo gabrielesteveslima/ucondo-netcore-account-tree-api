@@ -1,5 +1,6 @@
 ﻿namespace UCondoAccountTree.Application;
-public class Class1
-{
 
+public class IQueryHandler
+{
+    
 }
