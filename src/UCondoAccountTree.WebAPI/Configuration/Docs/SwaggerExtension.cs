@@ -8,7 +8,7 @@ internal static class SwaggerExtension
     {
         services.AddSwaggerGen(setup =>
         {
-            setup.SwaggerDoc("v1", new OpenApiInfo { Title = "Me Challenge API V1", Version = "v1" });
+            setup.SwaggerDoc("v1", new OpenApiInfo { Title = "UCondo Account Tree API V1", Version = "v1" });
         });
 
         return services;
@@ -20,7 +20,7 @@ internal static class SwaggerExtension
 
         app.UseSwaggerUI(setup =>
         {
-            setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Me Challenge API V1");
+            setup.SwaggerEndpoint("/swagger/v1/swagger.json", "UCondo Account Tree API V1");
         });
     }
 }
