@@ -71,12 +71,12 @@ public class AccountController : ControllerBase
         return Ok(codeSuggestion);
     }
 
-    [HttpPatch("{accountId:guid}")]
-    [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateAccount(AccountDto request)
-    {
-        var codeSuggestion = await _mediator.Send(new UpdateAccountCommand(request.Name,
-            request.AccountCode, request.AccountTypeId, request.ParentAccountId, request.AcceptBilling));
-        return Ok(codeSuggestion);
-    }
+    // [HttpPatch("{accountId:guid}")]
+    // [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
+    // public async Task<IActionResult> UpdateAccount(AccountDto request)
+    // {
+    //     var codeSuggestion = await _mediator.Send(new UpdateAccountCommand(request.Name,
+    //         request.AccountCode, request.AccountTypeId, request.ParentAccountId, request.AcceptBilling));
+    //     return Ok(codeSuggestion);
+    // }
 }
