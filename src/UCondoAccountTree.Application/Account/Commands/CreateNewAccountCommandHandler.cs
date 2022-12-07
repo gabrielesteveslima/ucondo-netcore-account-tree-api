@@ -22,7 +22,6 @@ public class CreateNewAccountCommandHandler : ICommandHandler<CreateNewAccountCo
         var accountTypeId = new AccountTypeId(request.AccountTypeId);
         Account account;
 
-        // create a parent
         if (request.ParentAccountId == Guid.Empty)
         {
             account = Account.Create(_accountRepository, request.AccountCode, request.Name, accountTypeId, request.AcceptBilling);

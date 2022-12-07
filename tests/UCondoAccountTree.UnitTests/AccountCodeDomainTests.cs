@@ -14,7 +14,6 @@ public class AccountCodeDomainTests
     public string GivenAccountCode_WhenGetNextCode_ShouldCode(string code)
     {
         var accountRepository = Substitute.For<IAccountRepository>();
-        var accountType = new AccountTypeId(Guid.NewGuid());
         var lastAccountOfParent = Account.Create(accountRepository, code, "lorem ipsum", new AccountTypeId(Guid.NewGuid()), true);
 
         return AccountCode.GetNextCode(lastAccountOfParent);
