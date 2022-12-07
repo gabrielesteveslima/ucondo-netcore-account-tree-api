@@ -28,10 +28,15 @@ public class AccountRepository : IAccountRepository
         return _context.Accounts.Any(x => x.AccountCode.Value == accountCode);
     }
 
-    public async Task<List<Account>> GetAllAsync()
+    public async Task<List<Account>> GetAllAsync(int skip, int pageSize)
     {
-        return await _context.Accounts
+        return await _context.Accounts.Skip(skip).Take(pageSize)
             .ToListAsync();
+    }
+
+    public async Task<double> CountAccountsAsync()
+    {
+        return await _context.Accounts.CountAsync();
     }
 
     public async Task<Account> GetLastRelationIfExistsOrParentAccount(AccountId parentAccountId)

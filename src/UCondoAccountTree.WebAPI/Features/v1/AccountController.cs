@@ -37,9 +37,9 @@ public class AccountController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAccounts()
+    public async Task<IActionResult> GetAccounts([FromQuery] PagedAccountsQueryParams accountsQueryParams)
     {
-        var accountsList = await _mediator.Send(new GetAccountsQuery());
+        var accountsList = await _mediator.Send(new GetAccountsQuery(accountsQueryParams.PageNumber, accountsQueryParams.PageSize));
         return Ok(accountsList);
     }
 

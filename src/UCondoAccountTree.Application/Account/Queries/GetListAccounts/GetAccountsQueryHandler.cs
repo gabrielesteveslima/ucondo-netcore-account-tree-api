@@ -2,7 +2,7 @@
 
 using UCondoAccountTree.Domain.AggregatesModels.Accounts;
 
-public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountDtoList>
+public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountsPagedList>
 {
     private readonly IAccountRepository _accountRepository;
 
@@ -11,20 +11,14 @@ public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountDt
         _accountRepository = accountRepository;
     }
 
-    //TODO> fix child accounts
-    public async Task<AccountDtoList> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+    public async Task<AccountsPagedList> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
     {
-        var allAccounts = await _accountRepository.GetAllAsync();
-        var responseList = new AccountDtoList();
+        var totalAccounts = await _accountRepository.CountAccountsAsync();
+        var totalPages = Math.Ceiling(totalAccounts / request.PageSize);
+        var skip = (request.PageNumber - 1) * request.PageSize;
 
-        foreach (var account in allAccounts)
-        {
-            foreach (var childOfAccount in account.AccountsRelations)
-            {
-                responseList.Data.Add(new AccountDtoListData { ParentAccount = new AccountDto { Name = account.Name, AccountCode = account.AccountCode.Value }, ChildAccounts = allAccounts.Where(x => x.AccountsRelations.Any(y => y.ParentAccountId == account.AccountId)).Select(x => new AccountDto { Name = x.Name, AccountCode = x.AccountCode.Value }) });
-            }
-        }
+        var accounts = await _accountRepository.GetAllAsync(skip, request.PageSize);
 
-        return responseList;
+        return new AccountsPagedList { TotalAccounts = totalAccounts, TotalPages = totalPages, Accounts = accounts.Select(x => new AccountsPagedListData { Name = x.Name, AccountId = x.AccountId.Value }) };
     }
 }
