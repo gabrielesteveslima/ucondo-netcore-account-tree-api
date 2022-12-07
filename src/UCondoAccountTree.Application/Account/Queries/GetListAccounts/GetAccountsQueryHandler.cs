@@ -19,6 +19,20 @@ public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountsP
 
         var accounts = await _accountRepository.GetAllAsync(skip, request.PageSize);
 
-        return new AccountsPagedList { TotalAccounts = totalAccounts, TotalPages = totalPages, Accounts = accounts.Select(x => new AccountsPagedListData { Name = x.Name, AccountId = x.AccountId.Value }) };
+        var result = new AccountsPagedList { TotalAccounts = totalAccounts, TotalPages = totalPages };
+
+        foreach (var account in accounts)
+        {
+            var item = new AccountsPagedListData { Name = account.Name, AccountId = account.AccountId.Value };
+
+            foreach (var accountsRelation in account.AccountsRelations)
+            {
+                item.ChildAccounts.Add(accountsRelation.ChildAccountId.Value);
+            }
+            
+            result.Accounts.Add(item);
+        }
+
+        return result;
     }
 }
