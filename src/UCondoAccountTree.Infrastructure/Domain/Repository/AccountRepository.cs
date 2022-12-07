@@ -23,6 +23,11 @@ public class AccountRepository : IAccountRepository
         return await _context.Accounts.SingleAsync(x => x.AccountId == accountId);
     }
 
+    public async Task<List<Account>> GetByListIdAsync(List<AccountId> accountIds)
+    {
+        return await _context.Accounts.Where(x => accountIds.Contains(x.AccountId)).ToListAsync();
+    }
+
     public bool CheckAccountCodeExists(string accountCode)
     {
         return _context.Accounts.Any(x => x.AccountCode.Value == accountCode);
