@@ -11,7 +11,7 @@ public class AccountDomainTests
     public void GivenAccountWithBilling_WhenAssociateAParentAccount_ShouldBusinessException()
     {
         const bool hasBillingAccount = true;
-        var accountRepository = Substitute.For<IAccountRepository>();       
+        var accountRepository = Substitute.For<IAccountRepository>();
         var accountType = AccountType.Create("Lorem Ipsum");
         var parentAccount = Account.Create(accountRepository, "1", "Parent Account", accountType.AccountTypeId, hasBillingAccount);
 
@@ -24,7 +24,7 @@ public class AccountDomainTests
     [Test]
     public void GivenAccount_WhenParentAccount_ShouldSuccessCreated()
     {
-        var accountRepository = Substitute.For<IAccountRepository>();       
+        var accountRepository = Substitute.For<IAccountRepository>();
         var accountTypeId = new AccountTypeId(Guid.NewGuid());
         var newAccount = Account.Create(accountRepository, "1", "Parent Account", accountTypeId, false);
 
@@ -36,7 +36,7 @@ public class AccountDomainTests
     [Test]
     public void GivenAccount_WhenParentAndAccountTypeDifferent_ShouldBusinessException()
     {
-        var accountRepository = Substitute.For<IAccountRepository>();       
+        var accountRepository = Substitute.For<IAccountRepository>();
         const bool hasBillingAccount = false;
         var accountType = AccountType.Create("Lorem Ipsum");
         var parentAccount = Account.Create(accountRepository, "1", "Parent Account", accountType.AccountTypeId, hasBillingAccount);

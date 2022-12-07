@@ -46,7 +46,7 @@ public class Account : Entity, IAggregateRoot
     public static Account Create(IAccountRepository accountRepository, string accountCode, string name, AccountTypeId accountType, bool acceptBilling)
     {
         CheckRule(new AccountCodeMustBeUnique(accountRepository, accountCode));
-        
+
         var parentAccountId = new AccountId(Guid.NewGuid());
         return new Account(parentAccountId, name, accountCode, accountType, acceptBilling);
     }

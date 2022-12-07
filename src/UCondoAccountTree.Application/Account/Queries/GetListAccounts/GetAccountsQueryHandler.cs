@@ -1,6 +1,6 @@
 ﻿namespace UCondoAccountTree.Application.Account.Queries.GetListAccounts;
 
-using UCondoAccountTree.Domain.AggregatesModels.Accounts;
+using Domain.AggregatesModels.Accounts;
 
 public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountsPagedList>
 {
@@ -28,7 +28,7 @@ public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountsP
 
             foreach (var accountsRelation in accountsRelations)
             {
-                item.ChildAccounts.Add(new AccountsPagedChildData() { Name = accountsRelation.Name, AccountId = accountsRelation.AccountId.Value, AccountCode = accountsRelation.AccountCode.Value });
+                item.ChildAccounts.Add(new AccountsPagedChildData { Name = accountsRelation.Name, AccountId = accountsRelation.AccountId.Value, AccountCode = accountsRelation.AccountCode.Value });
             }
 
             result.Accounts.Add(item);

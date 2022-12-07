@@ -108,7 +108,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
 
         return (seed * 23) + currentHash;
     }
-    
+
     protected static void CheckRule(IBusinessRule rule)
     {
         if (rule.IsBroken())

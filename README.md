@@ -4,7 +4,8 @@ Projeto de API com .NET Core 6
 
 ## Sobre o projeto
 
-O proposito desse projeto é criar contas ("Accounts") e vincular a outras contas pais ("AccountRelations") e selecionar tipos de contas ("AccountsTypes")
+O proposito desse projeto é criar contas ("Accounts") e vincular a outras contas pais ("AccountRelations") e selecionar
+tipos de contas ("AccountsTypes")
 
 ## Base de dados
 
@@ -19,8 +20,10 @@ para aprendizado e o projeto não possui alta complexidade de negocio.
 
 Camadas de aplicação e infraestrutura e uma camada compartilhada chamada `SeedWorks`.
 
-* As regras de negocios + contratos de infraestrutura estão na Camada de Dominio (evitando classes anemicas (somentes entidades com Get e Sets sem logicas))
-* Dentro do Application estão a Orquestração entre Domain, Infra e UI (no caso uma API.. mas poderia ser uma console etc)
+* As regras de negocios + contratos de infraestrutura estão na Camada de Dominio (evitando classes anemicas (somentes
+  entidades com Get e Sets sem logicas))
+* Dentro do Application estão a Orquestração entre Domain, Infra e UI (no caso uma API.. mas poderia ser uma console
+  etc)
 * Validações feitas com o FluentValidation para os Commands no seguinte padrão:
 
 ````
