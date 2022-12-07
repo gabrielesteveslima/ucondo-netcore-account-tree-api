@@ -1,4 +1,4 @@
-﻿namespace UCondoAccountTree.Application.Account.Queries;
+﻿namespace UCondoAccountTree.Application.Account;
 
 public class AccountDtoListData
 {

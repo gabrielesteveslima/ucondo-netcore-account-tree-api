@@ -3,7 +3,10 @@
 using Application.Account;
 using Application.Account.Commands;
 using Application.Account.Queries;
+using Application.Account.Queries.GetListAccounts;
+using Application.Account.Queries.GetNextCode;
 using Configuration.ProblemDetails.Helpers;
+using Domain.AggregatesModels.Accounts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -33,10 +36,18 @@ public class AccountController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAccounts()
     {
         var accountsList = await _mediator.Send(new GetAccountsQuery());
         return Ok(accountsList);
+    }
+
+    [HttpGet("{accountId:guid}/next-code")]
+    [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetNextAccountCode(Guid accountId)
+    {
+        var codeSuggestion = await _mediator.Send(new GetNextAccountCodeQuery(new AccountId(accountId)));
+        return Ok(codeSuggestion);
     }
 }

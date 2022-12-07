@@ -9,6 +9,7 @@ public class AccountCode : ValueObject
 
     private AccountCode(string accountCode)
     {
+        CheckRule(new AccountCodeMatchesWithStandard(accountCode));
         Value = accountCode;
     }
 

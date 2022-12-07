@@ -71,6 +71,18 @@ namespace UCondoAccountTree.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "AccountTypes",
+                columns: new[] { "AccountTypeId", "CreateAt", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("476e1eb6-40fb-4276-b58a-f4985f8dec56"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Receitas" },
+                    { new Guid("4ce68b54-fa8d-47e1-af0f-4bc20ef71f60"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Multas" },
+                    { new Guid("7c1f24fb-985b-4a85-8283-64590034cb7b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Taxas Condominiais" },
+                    { new Guid("bad3d653-5187-4199-80c0-fda7d4d82c7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Despesas" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_AccountTypeId",
                 schema: "dbo",

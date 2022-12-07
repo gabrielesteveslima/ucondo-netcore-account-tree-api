@@ -2,24 +2,9 @@
 
 public class AccountDto
 {
-    public AccountDto(string name, string accountCode, Guid accountTypeId, Guid parentAccountId, bool acceptBilling)
-    {
-        Name = name;
-        AccountCode = accountCode;
-        AccountTypeId = accountTypeId;
-        ParentAccountId = parentAccountId;
-        AcceptBilling = acceptBilling;
-    }
-
-    public AccountDto(string name, string accountCode)
-    {
-        Name = name;
-        AccountCode = accountCode;
-    }
-
-    public string Name { get; }
-    public string AccountCode { get; }
-    public Guid AccountTypeId { get; }
-    public Guid ParentAccountId { get; }
-    public bool AcceptBilling { get; }
+    public string Name { get; set; }
+    public string AccountCode { get; set; }
+    public Guid AccountTypeId { get; set; }
+    public Guid ParentAccountId { get; set; }
+    public bool AcceptBilling { get; set; }
 }

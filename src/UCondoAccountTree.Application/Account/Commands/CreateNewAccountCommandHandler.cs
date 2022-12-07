@@ -25,18 +25,25 @@ public class CreateNewAccountCommandHandler : ICommandHandler<CreateNewAccountCo
         // create a parent
         if (request.ParentAccountId == Guid.Empty)
         {
-            account = Account.Create(request.AccountCode, request.Name, accountTypeId, request.AcceptBilling);
+            account = Account.Create(_accountRepository, request.AccountCode, request.Name, accountTypeId, request.AcceptBilling);
         }
         else
         {
             var parentAccount = await _accountRepository.GetByIdAsync(new AccountId(request.ParentAccountId));
             var accountType = await _accountTypeRepository.GetByIdAsync(new AccountTypeId(request.AccountTypeId));
-            account = Account.CreateChildAccount(parentAccount, request.AccountCode, request.Name, accountType, request.AcceptBilling);
+            account = Account.CreateChildAccount(_accountRepository, parentAccount, request.AccountCode, request.Name, accountType, request.AcceptBilling);
         }
 
         await _accountRepository.AddAsync(account);
         await _unitOfWork.CommitAsync(cancellationToken);
 
-        return new AccountDto(account.Name, account.AccountCode.Value, account.AccountTypeId.Value, request.ParentAccountId, account.AcceptBilling);
+        return new AccountDto
+        {
+            Name = account.Name,
+            AcceptBilling = account.AcceptBilling,
+            AccountCode = account.AccountCode.Value,
+            AccountTypeId = account.AccountTypeId.Value,
+            ParentAccountId = request.ParentAccountId
+        };
     }
 }

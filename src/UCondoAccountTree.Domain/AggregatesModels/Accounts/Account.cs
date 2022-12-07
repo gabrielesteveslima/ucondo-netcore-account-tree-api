@@ -30,8 +30,9 @@ public class Account : Entity, IAggregateRoot
     public string Name { get; }
     public bool AcceptBilling { get; }
 
-    public static Account CreateChildAccount(Account parentAccount, string accountCode, string name, AccountType accountType, bool acceptBilling)
+    public static Account CreateChildAccount(IAccountRepository accountRepository, Account parentAccount, string accountCode, string name, AccountType accountType, bool acceptBilling)
     {
+        CheckRule(new AccountCodeMustBeUnique(accountRepository, accountCode));
         CheckRule(new AccountWithBillingCannotParent(parentAccount));
         CheckRule(new AccountMustBeSameTypeParent(parentAccount, accountType));
 
@@ -42,8 +43,10 @@ public class Account : Entity, IAggregateRoot
         return new Account(childAccountId, name, accountCode, accountType.AccountTypeId, acceptBilling);
     }
 
-    public static Account Create(string accountCode, string name, AccountTypeId accountType, bool acceptBilling)
+    public static Account Create(IAccountRepository accountRepository, string accountCode, string name, AccountTypeId accountType, bool acceptBilling)
     {
+        CheckRule(new AccountCodeMustBeUnique(accountRepository, accountCode));
+        
         var parentAccountId = new AccountId(Guid.NewGuid());
         return new Account(parentAccountId, name, accountCode, accountType, acceptBilling);
     }

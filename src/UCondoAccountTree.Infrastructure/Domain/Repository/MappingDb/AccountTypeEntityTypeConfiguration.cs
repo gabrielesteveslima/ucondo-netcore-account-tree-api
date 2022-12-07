@@ -20,5 +20,12 @@ public class AccountTypeEntityTypeConfiguration : IEntityTypeConfiguration<Accou
             .WithOne(x => x.AccountTypeRef)
             .HasForeignKey(x => x.AccountTypeId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasData(
+            AccountType.Create("Receitas"),
+            AccountType.Create("Taxas Condominiais"),
+            AccountType.Create("Multas"),
+            AccountType.Create("Despesas")
+        );
     }
 }

@@ -13,7 +13,7 @@ public class AccountCodeMustBeUnique : IBusinessRule
 
     public bool IsBroken()
     {
-        return false;
+        return _accountRepository.CheckAccountCodeExists(_accountCode);
     }
 
     public string Message => "Account Code already exists";

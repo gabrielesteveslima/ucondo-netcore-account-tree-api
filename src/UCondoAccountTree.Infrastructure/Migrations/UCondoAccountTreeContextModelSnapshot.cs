@@ -62,6 +62,32 @@ namespace UCondoAccountTree.Infrastructure.Migrations
                     b.HasKey("AccountTypeId");
 
                     b.ToTable("AccountTypes", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            AccountTypeId = new Guid("476e1eb6-40fb-4276-b58a-f4985f8dec56"),
+                            CreateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Receitas"
+                        },
+                        new
+                        {
+                            AccountTypeId = new Guid("7c1f24fb-985b-4a85-8283-64590034cb7b"),
+                            CreateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Taxas Condominiais"
+                        },
+                        new
+                        {
+                            AccountTypeId = new Guid("4ce68b54-fa8d-47e1-af0f-4bc20ef71f60"),
+                            CreateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Multas"
+                        },
+                        new
+                        {
+                            AccountTypeId = new Guid("bad3d653-5187-4199-80c0-fda7d4d82c7f"),
+                            CreateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Despesas"
+                        });
                 });
 
             modelBuilder.Entity("UCondoAccountTree.Domain.AggregatesModels.Accounts.Account", b =>
@@ -90,7 +116,7 @@ namespace UCondoAccountTree.Infrastructure.Migrations
                                 .HasForeignKey("AccountId");
                         });
 
-                    b.OwnsMany("UCondoAccountTree.Domain.AggregatesModels.Accounts.AccountsRelations", "AccountsRelationsList", b1 =>
+                    b.OwnsMany("UCondoAccountTree.Domain.AggregatesModels.Accounts.AccountsRelations", "AccountsRelations", b1 =>
                         {
                             b1.Property<Guid>("ParentAccountId")
                                 .HasColumnType("uniqueidentifier");
@@ -114,7 +140,7 @@ namespace UCondoAccountTree.Infrastructure.Migrations
 
                     b.Navigation("AccountTypeRef");
 
-                    b.Navigation("AccountsRelationsList");
+                    b.Navigation("AccountsRelations");
                 });
 
             modelBuilder.Entity("UCondoAccountTree.Domain.AggregatesModels.AccountTypes.AccountType", b =>

@@ -13,6 +13,7 @@ public class AccountType : Entity, IAggregateRoot
     private AccountType(string name)
     {
         AccountTypeId = new AccountTypeId(Guid.NewGuid());
+        CreateAt = DateTime.Now;
         Name = name;
     }
 
