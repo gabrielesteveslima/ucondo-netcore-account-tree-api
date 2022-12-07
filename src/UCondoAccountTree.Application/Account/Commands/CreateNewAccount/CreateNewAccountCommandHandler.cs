@@ -1,5 +1,6 @@
-﻿namespace UCondoAccountTree.Application.Account.Commands;
+﻿namespace UCondoAccountTree.Application.Account.Commands.CreateNewAccount;
 
+using Configuration;
 using Domain.AggregatesModels.Accounts;
 using Domain.AggregatesModels.AccountTypes;
 using Domain.SeedWorks;
@@ -29,6 +30,10 @@ public class CreateNewAccountCommandHandler : ICommandHandler<CreateNewAccountCo
         else
         {
             var parentAccount = await _accountRepository.GetByIdAsync(new AccountId(request.ParentAccountId));
+
+            if (parentAccount == null)
+                throw new NotFoundException($"not found parent account with {request.ParentAccountId}");
+
             var accountType = await _accountTypeRepository.GetByIdAsync(new AccountTypeId(request.AccountTypeId));
             account = Account.CreateChildAccount(_accountRepository, parentAccount, request.AccountCode, request.Name, accountType, request.AcceptBilling);
         }

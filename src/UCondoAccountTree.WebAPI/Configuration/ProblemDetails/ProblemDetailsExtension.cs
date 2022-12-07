@@ -16,6 +16,8 @@ public static class ProblemDetailsExtension
                 new InvalidCommandRuleValidationExceptionProblemDetails(exception));
             setup.Map<BusinessRuleValidationException>(exception =>
                 new BusinessRuleValidationExceptionProblemDetails(exception));
+            setup.Map<NotFoundException>(exception =>
+                new NotFoundExceptionProblemDetails(exception));
         });
 
         return services;

@@ -1,8 +1,8 @@
-﻿namespace UCondoAccountTree.Application.Account.Commands.CreateNewAccount;
+﻿namespace UCondoAccountTree.Application.Account.Commands.UpdateAccount;
 
-public class CreateNewAccountCommand : CommandBase<AccountDto>
+public class UpdateAccountCommand : CommandBase<AccountDto>
 {
-    public CreateNewAccountCommand(string name, string accountCode, Guid accountTypeId, Guid parentAccountId, bool acceptBilling)
+    public UpdateAccountCommand(string name, string accountCode, Guid accountTypeId, Guid parentAccountId, bool acceptBilling)
     {
         Name = name;
         AccountCode = accountCode;

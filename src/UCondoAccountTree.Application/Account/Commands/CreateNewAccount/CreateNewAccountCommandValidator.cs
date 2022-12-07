@@ -1,4 +1,4 @@
-﻿namespace UCondoAccountTree.Application.Account.Commands;
+﻿namespace UCondoAccountTree.Application.Account.Commands.CreateNewAccount;
 
 using FluentValidation;
 

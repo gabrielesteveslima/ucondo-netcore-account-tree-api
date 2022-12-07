@@ -2,7 +2,9 @@
 
 using Application.Account;
 using Application.Account.Commands;
+using Application.Account.Commands.CreateNewAccount;
 using Application.Account.Commands.DeleteAccount;
+using Application.Account.Commands.UpdateAccount;
 using Application.Account.Queries;
 using Application.Account.Queries.GetDetailsAccount;
 using Application.Account.Queries.GetListAccounts;
@@ -52,7 +54,7 @@ public class AccountController : ControllerBase
         var codeSuggestion = await _mediator.Send(new GetNextAccountCodeQuery(new AccountId(accountId)));
         return Ok(codeSuggestion);
     }
-    
+
     [HttpGet("{accountId:guid}")]
     [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAccountDetails(Guid accountId)
@@ -60,12 +62,21 @@ public class AccountController : ControllerBase
         var codeSuggestion = await _mediator.Send(new GetAccountDetailsQuery(new AccountId(accountId)));
         return Ok(codeSuggestion);
     }
-    
+
     [HttpDelete("{accountId:guid}")]
     [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteAccount(Guid accountId)
     {
         var codeSuggestion = await _mediator.Send(new DeleteAccountCommand(new AccountId(accountId)));
+        return Ok(codeSuggestion);
+    }
+
+    [HttpPatch("{accountId:guid}")]
+    [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> UpdateAccount(AccountDto request)
+    {
+        var codeSuggestion = await _mediator.Send(new UpdateAccountCommand(request.Name,
+            request.AccountCode, request.AccountTypeId, request.ParentAccountId, request.AcceptBilling));
         return Ok(codeSuggestion);
     }
 }
