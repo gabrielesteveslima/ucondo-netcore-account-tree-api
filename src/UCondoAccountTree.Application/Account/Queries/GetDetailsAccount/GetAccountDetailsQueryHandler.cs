@@ -15,7 +15,7 @@ public class GetAccountDetailsQueryHandler : IQueryHandler<GetAccountDetailsQuer
     {
         var account = await _accountRepository.GetByIdAsync(request.AccountId);
 
-        var result = new AccountDetailsDto() { Name = account.Name, AccountCode = account.AccountCode.Value, AccountId = account.AccountId.Value };
+        var result = new AccountDetailsDto { Name = account.Name, AccountCode = account.AccountCode.Value, AccountId = account.AccountId.Value };
 
         var accountRelations = await _accountRepository.GetByListIdAsync(account.AccountsRelations.Select(x => x.ChildAccountId).ToList());
         foreach (var accountRelation in accountRelations)

@@ -57,4 +57,9 @@ public class AccountRepository : IAccountRepository
 
         return parentAccount;
     }
+
+    public void DeleteAccount(Account account)
+    {
+        _context.Accounts.Remove(account);
+    }
 }

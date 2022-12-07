@@ -9,4 +9,5 @@ public interface IAccountRepository
     Task<List<Account>> GetAllAsync(int skip, int pageSize);
     Task<double> CountAccountsAsync();
     Task<Account> GetLastRelationIfExistsOrParentAccount(AccountId parentAccountId);
+    void DeleteAccount(Account account);
 }

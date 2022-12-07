@@ -27,7 +27,7 @@ public class AccountTypeController : ControllerBase
     public async Task<IActionResult> CreateNewAccountType(AccountTypeDto request)
     {
         var accountType = await _mediator.Send(new CreateNewAccountTypeCommand(request.Name));
-        return Ok(accountType);
+        return Created(accountType.AccountTypeId.ToString(), accountType);
     }
 
     [HttpGet]

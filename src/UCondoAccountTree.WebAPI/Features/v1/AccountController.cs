@@ -2,6 +2,7 @@
 
 using Application.Account;
 using Application.Account.Commands;
+using Application.Account.Commands.DeleteAccount;
 using Application.Account.Queries;
 using Application.Account.Queries.GetDetailsAccount;
 using Application.Account.Queries.GetListAccounts;
@@ -33,7 +34,7 @@ public class AccountController : ControllerBase
         var account = await _mediator.Send(new CreateNewAccountCommand(request.Name,
             request.AccountCode, request.AccountTypeId, request.ParentAccountId, request.AcceptBilling));
 
-        return Ok(account);
+        return Created(account.AccountTypeId.ToString(), account);
     }
 
     [HttpGet]
@@ -57,6 +58,14 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetAccountDetails(Guid accountId)
     {
         var codeSuggestion = await _mediator.Send(new GetAccountDetailsQuery(new AccountId(accountId)));
+        return Ok(codeSuggestion);
+    }
+    
+    [HttpDelete("{accountId:guid}")]
+    [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> DeleteAccount(Guid accountId)
+    {
+        var codeSuggestion = await _mediator.Send(new DeleteAccountCommand(new AccountId(accountId)));
         return Ok(codeSuggestion);
     }
 }
