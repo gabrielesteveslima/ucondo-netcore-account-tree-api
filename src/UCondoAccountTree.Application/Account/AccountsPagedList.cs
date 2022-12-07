@@ -4,28 +4,28 @@ public class AccountsPagedList
 {
     public AccountsPagedList()
     {
-        Accounts = new List<AccountsPagedListData>();
+        Accounts = new List<AccountDetailsDto>();
     }
 
-    public List<AccountsPagedListData> Accounts { get; set; }
+    public List<AccountDetailsDto> Accounts { get; set; }
     public double TotalAccounts { get; set; }
     public double TotalPages { get; set; }
 }
 
-public class AccountsPagedListData
+public class AccountDetailsDto
 {
-    public AccountsPagedListData()
+    public AccountDetailsDto()
     {
-        ChildAccounts = new List<AccountsPagedChildData>();
+        ChildAccounts = new List<AccountRelationDto>();
     }
 
     public Guid AccountId { get; set; }
     public string AccountCode { get; set; }
-    public List<AccountsPagedChildData> ChildAccounts { get; set; }
+    public List<AccountRelationDto> ChildAccounts { get; set; }
     public string Name { get; set; }
 }
 
-public class AccountsPagedChildData
+public class AccountRelationDto
 {
     public Guid AccountId { get; set; }
     public string Name { get; set; }

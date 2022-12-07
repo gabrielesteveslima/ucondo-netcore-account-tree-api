@@ -3,6 +3,7 @@
 using Application.Account;
 using Application.Account.Commands;
 using Application.Account.Queries;
+using Application.Account.Queries.GetDetailsAccount;
 using Application.Account.Queries.GetListAccounts;
 using Application.Account.Queries.GetNextCode;
 using Configuration.ProblemDetails.Helpers;
@@ -48,6 +49,14 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetNextAccountCode(Guid accountId)
     {
         var codeSuggestion = await _mediator.Send(new GetNextAccountCodeQuery(new AccountId(accountId)));
+        return Ok(codeSuggestion);
+    }
+    
+    [HttpGet("{accountId:guid}")]
+    [ProducesResponseType(typeof(CodeSuggestionDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAccountDetails(Guid accountId)
+    {
+        var codeSuggestion = await _mediator.Send(new GetAccountDetailsQuery(new AccountId(accountId)));
         return Ok(codeSuggestion);
     }
 }

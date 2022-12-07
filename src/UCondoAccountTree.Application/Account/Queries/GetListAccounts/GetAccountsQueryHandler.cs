@@ -23,12 +23,12 @@ public class GetAccountsQueryHandler : IQueryHandler<GetAccountsQuery, AccountsP
 
         foreach (var account in accounts)
         {
-            var item = new AccountsPagedListData { Name = account.Name, AccountId = account.AccountId.Value, AccountCode = account.AccountCode.Value };
+            var item = new AccountDetailsDto { Name = account.Name, AccountId = account.AccountId.Value, AccountCode = account.AccountCode.Value };
             var accountsRelations = await _accountRepository.GetByListIdAsync(account.AccountsRelations.Select(x => x.ChildAccountId).ToList());
 
             foreach (var accountsRelation in accountsRelations)
             {
-                item.ChildAccounts.Add(new AccountsPagedChildData { Name = accountsRelation.Name, AccountId = accountsRelation.AccountId.Value, AccountCode = accountsRelation.AccountCode.Value });
+                item.ChildAccounts.Add(new AccountRelationDto { Name = accountsRelation.Name, AccountId = accountsRelation.AccountId.Value, AccountCode = accountsRelation.AccountCode.Value });
             }
 
             result.Accounts.Add(item);
